@@ -18,8 +18,8 @@
 # your commands here
 
 
-onmt_build_vocab -config toy_en_bn.yaml -n_sample 10000
+#onmt_build_vocab -config toy_en_bn.yaml -n_sample 10000
 
-onmt_train -config toy_en_bn.yaml
+#onmt_train -config toy_en_bn.yaml
 
 onmt_translate -model /home/akandimalla/practicum/toy-enbn/run/model_step_1000.pt -src /home/akandimalla/practicum/toy-enbn/src-test.txt -output /home/akandimalla/practicum/toy-enbn/src-test.txt.trans -gpu 0 -verbose

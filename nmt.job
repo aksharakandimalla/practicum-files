@@ -1,0 +1,25 @@
+#!/bin/sh
+#SBATCH --nodes 1    # how many nodes are required (in most cases it is 1)
+#SBATCH -J NMT_enbn   # arbitrary name for the job (you choose)
+#SBATCH -t 48:00:00    # maximum execution time, (optional)
+#SBATCH -p compute
+#SBATCH --gres=gpu:1
+
+
+# load modules if needed (modules are used in the Boole cluster only)
+#module load staskfarm
+# check which modules are available
+#module av
+
+# uncomment the following to get a log of memory usage
+# vmstat -S M {interval_secs} >> memory_usage_$SLURM_JOBID.log &
+
+
+# your commands here
+
+
+onmt_build_vocab -config toy_en_bn.yaml -n_sample 10000
+
+onmt_train -config toy_en_bn.yaml
+
+onmt_translate -model /home/akandimalla/practicum/toy-enbn/run/model_step_1000.pt -src /home/akandimalla/practicum/toy-enbn/src-test.txt -output /home/akandimalla/practicum/toy-enbn/src-test.txt.trans -gpu 0 -verbose

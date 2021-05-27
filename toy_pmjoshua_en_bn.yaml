@@ -1,0 +1,65 @@
+# toy_pmjoshua_en_bn.yaml
+
+## Where the samples will be written
+save_data: joshua_enbn/run/example
+## Where the vocab(s) will be written
+src_vocab: joshua_enbn/run/example.vocab.src
+tgt_vocab: toy-enbn/run/example.vocab.tgt
+# Prevent overwriting existing files in the folder
+overwrite: False
+
+# Corpus opts:
+data:
+    corpus_1:
+        path_src: joshua_enbn/train_pmjoshua_NMT.bn
+        path_tgt: joshua_enbn/train_pmjoshua_NMT.en
+    valid:
+        path_src: joshua_enbn/dev_pmjoshua_NMT.bn
+        path_tgt: joshua_enbn/dev_pmjoshua_NMT.en
+
+# Vocabulary files that were just created
+src_vocab: joshua_enbn/run/example.vocab.src
+tgt_vocab: joshua_enbn/run/example.vocab.tgt
+
+# Train on a single GPU
+world_size: 1
+gpu_ranks: [0]
+
+
+# Where to save the checkpoints
+save_model: joshua_enbn/run/model
+save_checkpoint_steps: 500
+keep_checkpoint: 10
+seed: 3435
+train_steps: 1000
+valid_steps: 500
+warmup_steps: 100
+report_every: 50
+
+decoder_type: transformer
+encoder_type: transformer
+word_vec_size: 512
+rnn_size: 512
+layers: 6
+transformer_ff: 2048
+heads: 8
+
+accum_count: 8
+optim: adam
+adam_beta1: 0.9
+adam_beta2: 0.998
+decay_method: noam
+learning_rate: 2.0
+max_grad_norm: 0.0
+
+batch_size: 4096
+batch_type: tokens
+normalization: tokens
+dropout: 0.1
+label_smoothing: 0.1
+
+max_generator_batches: 2
+
+param_init: 0.0
+param_init_glorot: 'true'
+position_encoding: 'true'

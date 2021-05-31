@@ -34,11 +34,11 @@ gpu_ranks: [0]
 
 # Where to save the checkpoints
 save_model: toy-fasttext-enbn/run/model
-save_checkpoint_steps: 500
+save_checkpoint_steps: 5000
 keep_checkpoint: 10
 seed: 3435
-train_steps: 1000
-valid_steps: 500
+train_steps: 100000
+valid_steps: 50000
 warmup_steps: 100
 report_every: 50
 

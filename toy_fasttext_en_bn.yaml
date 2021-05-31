@@ -21,8 +21,8 @@ data:
 src_vocab: toy-fasttext-enbn/run/example.vocab.src
 tgt_vocab: toy-fasttext-enbn/run/example.vocab.tgt
 
-src_embeddings:/home/akandimalla/practicum/fastText/cc.bn.300.bin
-tgt_embeddings:/home/akandimalla/practicum/fastText/cc.en.300.bin
+src_embeddings: fastText/fasttext cc.bn.300.bin
+tgt_embeddings: fastText/fasttext cc.en.300.bin
 
 embeddings_type: "fastText"
 word_vec_size: 300

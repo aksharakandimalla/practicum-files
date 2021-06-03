@@ -1,0 +1,21 @@
+#!/bin/sh
+#SBATCH --nodes 1    # how many nodes are required (in most cases it is 1)
+#SBATCH -J te-fasttext-embeddings-create   # arbitrary name for the job (you choose)
+#SBATCH -t 48:00:00    # maximum execution time, (optional)
+#SBATCH -p compute
+#SBATCH --gres=gpu:1
+
+
+# load modules if needed (modules are used in the Boole cluster only)
+#module load staskfarm
+# check which modules are available
+#module av
+
+# uncomment the following to get a log of memory usage
+# vmstat -S M {interval_secs} >> memory_usage_$SLURM_JOBID.log &
+
+
+# your commands here
+
+
+./fasttext skipgram -input ./te.txt -output result/model

@@ -1,6 +1,6 @@
 #!/bin/sh
 #SBATCH --nodes 1    # how many nodes are required (in most cases it is 1)
-#SBATCH -J s1_te_en   # arbitrary name for the job (you choose)
+#SBATCH -J s2_te_en   # arbitrary name for the job (you choose)
 #SBATCH -t 48:00:00    # maximum execution time, (optional)
 #SBATCH -p compute
 #SBATCH --gres=gpu:1
@@ -18,8 +18,9 @@
 # your commands here
 
 
-onmt_build_vocab -config s1_te_en.yaml -n_sample 70000
+onmt_build_vocab -config s2_te_en.yaml -n_sample 70000
 
-onmt_train -config s1_te_en.yaml
+onmt_train -config s2_te_en.yaml
 
-onmt_translate -model /home/akandimalla/practicum/te_en_models/s1/run/model_step_1000.pt -src /home/akandimalla/practicum/te_en_models/s1/s1_test.te -output /home/akandimalla/practicum/te_en_models/s1/s1_test.te.trans -gpu 0 -verbose
+onmt_translate -model /home/akandimalla/practicum/te_en_models/s2/run/model_step_1000.pt -src /home/akandimalla/practicum/te_en_models/s2/s2_te_test.txt -output /home/akandimalla/practicum/te_en_models/s2/s2_te_test.txt.trans -gpu 0 -verbose
+

@@ -10,7 +10,7 @@
 
 
 DATA_DIR=/home/akandimalla/practicum/data/en_hi
-OUT_DIR=/home/akandimalla/practicum2/data/en_hi/preprocessed
+OUT_DIR=/home/akandimalla/practicum/data/en_hi/preprocessed
 
 
 all_file_list="IITB.en-hi dev test"

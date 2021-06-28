@@ -1,0 +1,26 @@
+#!/bin/sh
+#SBATCH --nodes 1    # how many nodes are required (in most cases it is 1)
+#SBATCH -J jw_en-bn   # arbitrary name for the job (you choose)
+#SBATCH -t 48:00:00    # maximum execution time, (optional)
+#SBATCH -p compute
+#SBATCH --gres=gpu:1
+##SBATCH --cpus-per-task=4    # tell Slurm how many CPU cores you need, if different from default; your job won't be able to use more t
+han this
+##SBATCH --gres=gpu:rtx2080ti:4
+#SBATCH --mail-user=your email
+#SBATCH --mail-type=END
+
+
+## Note that you will be requesting one GPU for this training. You can request for upto 4 GPUs for single traning. 
+## In that case, put one more # in the "#SBATCH --gres=gpu:1" command that will comment this 
+## and delete one # from "##SBATCH --cpus-per-task=4" and "##SBATCH --gres=gpu:rtx2080ti:4" commands. 
+## then, go to the training.yaml file and change world size = 1 to world size = 4 
+## and gpu ranks=[0] to gpu ranks = [0, 1, 2, 3]
+
+## However, I am not reccomending these at this moment. 
+
+
+# your commands here
+confFile=training.yaml
+
+onmt_train -config $confFile

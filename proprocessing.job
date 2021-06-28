@@ -1,0 +1,74 @@
+#!/bin/sh
+#SBATCH --nodes 1    # how many nodes are required (in most cases it is 1)
+#SBATCH -J preprocess   # arbitrary name for the job (you choose)
+#SBATCH -t 5:00:00    # maximum execution time, (optional)
+#SBATCH -p compute
+#SBATCH --gres=gpu:1
+#SBATCH --mail-user=your email
+#SBATCH --mail-type=END
+
+
+DATA_DIR=your-data-dir   ##this should be /home/...data/en_bn, in this directory, you have all your train, dev and test data set
+OUT_DIR=your-data-dir/preprocessed    ##this should be /home/...data/en_bn/preprocessed
+
+
+all_file_list="jw.train dev test"    ##jw is the name of your corpus
+train_file_list="jw.train"
+dev_test_file_list="dev test"
+
+TRAIN_PRE=jw.train
+
+SRC=en     ##if you train other direction, it should be SRC=bn and TGT=en
+TGT=bn
+
+
+#NORMALIZATION
+echo normalising...
+for file in $all_file_list;do
+        sacremoses -l ${SRC} -j 4 normalize < ${DATA_DIR}/${file}.${SRC} > ${OUT_DIR}/${file}.nor.${SRC}
+        sacremoses -l ${TGT} -j 4 normalize < ${DATA_DIR}/${file}.${TGT} > ${OUT_DIR}/${file}.nor.${TGT}
+done
+
+
+#FILTER
+echo filtering training files.....
+for file in $train_file_list;do
+        python ${SCRIPT_DIR}/data_filter.py --data_dir ${OUT_DIR} --output_dir $OUT_DIR --corpus_name ${file}.nor --src ${SRC} --tgt ${TGT}
+done
+
+
+#TOKENIZATION
+echo tokenising training files.....
+for file in $train_file_list;do
+        sacremoses -l ${SRC} -j 4 tokenize  < ${OUT_DIR}/${file}.nor.filtered.${SRC} > ${OUT_DIR}/${file}.tok.${SRC}
+        sacremoses -l ${TGT} -j 4 tokenize  < ${OUT_DIR}/${file}.nor.filtered.${TGT} > ${OUT_DIR}/${file}.tok.${TGT}
+done
+
+echo tokenising dev and test files.....
+for file in $dev_test_file_list;do
+        sacremoses -l ${SRC} -j 4 tokenize  < ${OUT_DIR}/${file}.nor.${SRC} > ${OUT_DIR}/${file}.tok.${SRC}
+        sacremoses -l ${TGT} -j 4 tokenize  < ${OUT_DIR}/${file}.nor.${TGT} > ${OUT_DIR}/${file}.tok.${TGT}
+done
+
+
+
+#BPE
+echo training bpe...
+subword-nmt learn-bpe --input ${OUT_DIR}/${TRAIN_PRE}.tok.${SRC} -s 32000 -o ${OUT_DIR}/bpe_${SRC}.model
+subword-nmt learn-bpe --input ${OUT_DIR}/${TRAIN_PRE}.tok.${TGT} -s 32000 -o ${OUT_DIR}/bpe_${TGT}.model
+
+##If the above learning bpe method do not work, first check if there is any error. If it still doesn't work, comment them and uncomment the following learn bpe and run
+#subword-nmt learn-bpe -s 32000 < ${OUT_DIR}/${TRAIN_PRE}.tok.${SRC} > ${OUT_DIR}/bpe_${SRC}.model
+#subword-nmt learn-bpe -s 32000 < ${OUT_DIR}/${TRAIN_PRE}.tok.${TGT} > ${OUT_DIR}/bpe_${TGT}.model
+
+
+echo applying bpe to train files...
+subword-nmt apply-bpe -c ${OUT_DIR}/bpe_${SRC}.model  < ${OUT_DIR}/${TRAIN_PRE}.tok.${SRC} > ${OUT_DIR}/${TRAIN_PRE}.bpe.${SRC}
+subword-nmt apply-bpe -c ${OUT_DIR}/bpe_${TGT}.model  < ${OUT_DIR}/${TRAIN_PRE}.tok.${TGT} > ${OUT_DIR}/${TRAIN_PRE}.bpe.${TGT}
+
+
+echo appying bpe to dev and test files....
+for file in $dev_test_file_list;do
+        subword-nmt apply-bpe -c ${OUT_DIR}/bpe_${SRC}.model  < ${OUT_DIR}/${file}.tok.${SRC} > ${OUT_DIR}/${file}.bpe.${SRC}
+        subword-nmt apply-bpe -c ${OUT_DIR}/bpe_${TGT}.model  < ${OUT_DIR}/${file}.tok.${TGT} > ${OUT_DIR}/${file}.bpe.${TGT}
+done

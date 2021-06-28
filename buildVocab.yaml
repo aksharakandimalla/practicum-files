@@ -1,0 +1,30 @@
+# configuration details
+
+save_data: your data dir  ###this should be something like /home/...data/en_bn/preprocessed
+
+# Corpus opts:
+data:
+    corpus:
+        path_src: /home/.......data/en_bn/preprocessed/jw.train.bpe.en  #fill the dots with your path
+        path_tgt: /home/.......data/en_bn/preprocessed/jw.train.bpe.bn
+
+
+subword_nbest: 1
+subword_alpha: 0.0
+##### Filter
+src_seq_length: 150
+tgt_seq_length: 150
+##
+### silently ignore empty lines in the data
+skip_empty_level: silent
+
+### # Vocab opts
+### ### vocab:
+src_vocab: /home/...data/en_bn/preprocessed/vocab_jw.en
+tgt_vocab: /home/...data/en_bn/preprocessed/vocab_jw.pl
+src_vocab_size: 32000
+tgt_vocab_size: 32000
+vocab_size_multiple: 8
+src_words_min_frequency: 1
+tgt_words_min_frequency: 1
+n_sample: -1

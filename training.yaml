@@ -1,7 +1,7 @@
 # Config for MT training
 
 ##Note that you may not have some of the directories you are storing the files to, in such case, make the directory by simpley running the following commands
-mkdir <whole path of your directory>
+#mkdir <whole path of your directory>
 
 ###I am assuming you are training jw corpus, so if you use any other corpus, change the name, and also check the paths before running
 

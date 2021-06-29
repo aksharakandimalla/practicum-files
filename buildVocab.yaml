@@ -1,12 +1,12 @@
 # configuration details
 
-save_data: your data dir  ###this should be something like /home/...data/en_bn/preprocessed
+save_data: /home/akandimalla/practicum/data/en_hi/preprocessed/vocabulary/IITB  ###this should be something like /home/...data/en_bn/preprocessed
 
 # Corpus opts:
 data:
     corpus:
-        path_src: /home/.......data/en_bn/preprocessed/jw.train.bpe.en  #fill the dots with your path
-        path_tgt: /home/.......data/en_bn/preprocessed/jw.train.bpe.bn
+        path_src: /home/akandimalla/practicum/data/en_hi/preprocessed/IITB.en-hi.bpe.en  #fill the dots with your path
+        path_tgt: /home/akandimalla/practicum/data/en_hi/preprocessed/IITB.en-hi.bpe.hi
 
 
 subword_nbest: 1
@@ -20,8 +20,8 @@ skip_empty_level: silent
 
 ### # Vocab opts
 ### ### vocab:
-src_vocab: /home/...data/en_bn/preprocessed/vocab_jw.en
-tgt_vocab: /home/...data/en_bn/preprocessed/vocab_jw.pl
+src_vocab: /home/akandimalla/practicum/data/en_hi/preprocessed/vocabulary/IITB.vocab.src
+tgt_vocab: /home/akandimalla/practicum/data/en_hi/preprocessed/vocabulary/IITB.vocab.tgt
 src_vocab_size: 32000
 tgt_vocab_size: 32000
 vocab_size_multiple: 8

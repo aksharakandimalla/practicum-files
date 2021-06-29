@@ -22,4 +22,4 @@
 # your commands here
 confFile=training.yaml
 
-onmt_train -config $confFile
+onmt_train -config $confFile 

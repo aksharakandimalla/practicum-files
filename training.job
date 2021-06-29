@@ -4,8 +4,7 @@
 #SBATCH -t 48:00:00    # maximum execution time, (optional)
 #SBATCH -p compute
 #SBATCH --gres=gpu:1
-##SBATCH --cpus-per-task=4    # tell Slurm how many CPU cores you need, if different from default; your job won't be able to use more t
-han this
+##SBATCH --cpus-per-task=4    # tell Slurm how many CPU cores you need, if different from default; your job won't be able to use more than this
 ##SBATCH --gres=gpu:rtx2080ti:4
 #SBATCH --mail-user=your email
 #SBATCH --mail-type=END

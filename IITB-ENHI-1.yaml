@@ -80,4 +80,4 @@ transformer_ff: 2048
 dropout_steps: [0]
 dropout: [0.2]
 attention_dropout: [0.1]
-position_encoding: true(base)
+position_encoding: true

@@ -1,6 +1,6 @@
 #!/bin/sh
 #SBATCH --nodes 1    # how many nodes are required (in most cases it is 1)
-#SBATCH -J NMT_pmjoshua   # arbitrary name for the job (you choose)
+#SBATCH -J IITB-ENHI-1  # arbitrary name for the job (you choose)
 #SBATCH -t 48:00:00    # maximum execution time, (optional)
 #SBATCH -p compute
 #SBATCH --gres=gpu:1
@@ -18,8 +18,8 @@
 # your commands here
 
 
-onmt_build_vocab -config toy_pmjoshua_en_bn.yaml -n_sample 10000
+onmt_build_vocab -config /home/akandimalla/practicum/jobs/IITB-ENHI-1.yaml -n_sample 32000
 
-onmt_train -config toy_pmjoshua_en_bn.yaml
+onmt_train -config /home/akandimalla/practicum/jobs/IITB-ENHI-1.yaml
 
-onmt_translate -model /home/akandimalla/practicum/toy-pmjoshua-enbn/run/model_step_1000.pt -src /home/akandimalla/practicum/toy-pmjoshua-enbn/src-test.txt -output /home/akandimalla/practicum/toy-pmjoshua-enbn/src-test.txt.trans -gpu 0 -verbose
+

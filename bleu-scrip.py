@@ -39,4 +39,4 @@ print("MTed 1st sentence:", preds[0])
 
 # Calculate and print the BLEU score
 bleu = sacrebleu.corpus_bleu(preds, refs)
-print("BLEU: ", bleu.score
+print("BLEU: ", bleu.score)

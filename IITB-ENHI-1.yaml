@@ -5,11 +5,11 @@ save_data: /home/akandimalla/practicum/data/en_hi  ###this should be something l
 # Corpus opts:        
 data:
     corpus_1:
-        path_src: /home/akandimalla/practicum/data/en_hi/IITB.en-hi.en
-        path_tgt: /home/akandimalla/practicum/data/en_hi/IITB.en-hi.hi
+        path_src: data/en_hi/IITB.en-hi.en
+        path_tgt: data/en_hi/IITB.en-hi.hi
     valid:
-        path_src: /home/akandimalla/practicum/data/en_hi/dev.en
-        path_tgt: /home/akandimalla/practicum/data/en_hi/dev.hi
+        path_src: data/en_hi/dev.en
+        path_tgt: data/en_hi/dev.hi
 
 
 subword_nbest: 1
@@ -23,8 +23,8 @@ skip_empty_level: silent
 
 ### # Vocab opts
 ### ### vocab:
-src_vocab: ~/practicum/data/IITB_en.vocab.src
-tgt_vocab: ~/practicum/data/IITB_hi.vocab.tgt
+src_vocab: data/IITB_en.vocab.src
+tgt_vocab: data/IITB_hi.vocab.tgt
 src_vocab_size: 32000
 tgt_vocab_size: 32000
 vocab_size_multiple: 8
@@ -34,7 +34,7 @@ n_sample: -1
 
 
 # General opts
-save_model: /home/akandimalla/practicum/Models/en--hi  #/home/..../practicum2/models/en--bn  en--bn stands for language pair, in any directrion
+save_model: Models/en--hi  #/home/..../practicum2/models/en--bn  en--bn stands for language pair, in any directrion
 keep_checkpoint: 60
 save_checkpoint_steps: 10000
 average_decay: 0.0005

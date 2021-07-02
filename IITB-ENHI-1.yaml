@@ -2,12 +2,7 @@
 
 save_data: /home/akandimalla/practicum/data/en_hi  ###this should be something like /home/...data/en_bn/preprocessed
 
-# Corpus opts:
-data:
-    corpus:
-        path_src: /home/akandimalla/practicum/data/en_hi/IITB.en-hi.en  #fill the dots with your path
-        path_tgt: /home/akandimalla/practicum/data/en_hi/IITB.en-hi.hi
-        
+# Corpus opts:        
 data:
     corpus_1:
         path_src: /home/akandimalla/practicum/data/en_hi/IITB.en-hi.en

@@ -1,6 +1,6 @@
 # configuration details
 
-save_data: /home/akandimalla/practicum/data/en_hi/preprocessed/vocabulary/IITB  ###this should be something like /home/...data/en_bn/preprocessed
+save_data: /home/akandimalla/practicum/data/en_hi/  ###this should be something like /home/...data/en_bn/preprocessed
 
 # Corpus opts:
 data:

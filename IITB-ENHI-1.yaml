@@ -1,6 +1,6 @@
 # configuration details
 
-save_data: /home/akandimalla/practicum/data/en_hi  ###this should be something like /home/...data/en_bn/preprocessed
+save_data: /home/akandimalla/practicum/data/en_hi/IITB-1  ###this should be something like /home/...data/en_bn/preprocessed
 
 # Corpus opts:        
 data:
@@ -23,8 +23,8 @@ skip_empty_level: silent
 
 ### # Vocab opts
 ### ### vocab:
-src_vocab: data/en_hi.vocab.src
-tgt_vocab: data/en_hi.vocab.tgt
+src_vocab: data/voc/IITB_en.vocab.src
+tgt_vocab: data/voc/IITB_hi.vocab.tgt
 src_vocab_size: 32000
 tgt_vocab_size: 32000
 vocab_size_multiple: 8

@@ -1,0 +1,92 @@
+# IITB-ENHI-2.yaml
+
+# data from trainbible-uedin (43530) and trainOpenSubtitles (19055), total training sentences = 62585
+#
+# Byte pair encoding-200,000 worde model
+# glove embeddings
+#
+#
+## Where the samples will be written
+save_data: data/run/IITB-bpe-without-preprocessing
+## Where the vocab(s) will be written
+#src_vocab: s4/run4/example.vocab.src
+#tgt_vocab: s4/run4/example.vocab.tgt
+# Prevent overwriting existing files in the folder
+overwrite: False
+
+# Tokenization options
+src_subword_type: bpe
+src_subword_model: data/run/en.wiki.bpe.vs200000.model
+tgt_subword_type: bpe
+tgt_subword_model: data/run/hi.wiki.bpe.vs200000.model
+
+# Number of candidates for SentencePiece sampling
+subword_nbest: 20
+# Smoothing parameter for SentencePiece sampling
+subword_alpha: 0.1
+# Specific arguments for pyonmttok
+src_onmttok_kwargs: "{'mode': 'none', 'spacer_annotate': False}"
+tgt_onmttok_kwargs: "{'mode': 'none', 'spacer_annotate': False}"
+
+both_embeddings: te_en_models/glove_dir/glove_dir/glove.6B.100d.txt
+embeddings_type: "GloVe"
+word_vec_size: 100
+
+
+# Corpus opts:
+data:
+    corpus_1:
+        path_src: data/en_hi/IITB.en-hi.en
+        path_tgt: data/en_hi/IITB.en-hi.hi
+        transforms: [onmt_tokenize]
+    valid:
+        path_src: data/en_hi/dev.en
+        path_tgt: data/en_hi/dev.hi
+        transforms: [onmt_tokenize]
+
+# Vocabulary files that were just created
+src_vocab: data/run/en.wiki.bpe.vs200000.vocab
+tgt_vocab: data/run/hi.wiki.bpe.vs200000.vocab
+
+# Train on a single GPU
+world_size: 1
+gpu_ranks: [0]
+
+
+# Where to save the checkpoints
+save_model: Models/IITB-bpe-model
+save_checkpoint_steps: 10000
+keep_checkpoint: 10
+seed: 3435
+train_steps: 50000
+valid_steps: 10000
+warmup_steps: 500
+report_every: 5000
+
+decoder_type: transformer
+encoder_type: transformer
+word_vec_size: 512
+rnn_size: 512
+layers: 6
+transformer_ff: 2048
+heads: 8
+
+accum_count: 8
+optim: adam
+adam_beta1: 0.9
+adam_beta2: 0.998
+decay_method: noam
+learning_rate: 2.0
+max_grad_norm: 0.0
+
+batch_size: 4096
+batch_type: tokens
+normalization: tokens
+dropout: 0.1
+label_smoothing: 0.1
+
+max_generator_batches: 2
+
+param_init: 0.0
+param_init_glorot: 'true'
+position_encoding: 'true'

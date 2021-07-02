@@ -23,8 +23,8 @@ skip_empty_level: silent
 
 ### # Vocab opts
 ### ### vocab:
-src_vocab: /home/akandimalla/practicum/data/en_hi/IITB_en.vocab.src
-tgt_vocab: /home/akandimalla/practicum/data/en_hi/IITB_hi.vocab.tgt
+src_vocab: /home/akandimalla/practicum/data/IITB_en.vocab.src
+tgt_vocab: /home/akandimalla/practicum/data/IITB_hi.vocab.tgt
 src_vocab_size: 32000
 tgt_vocab_size: 32000
 vocab_size_multiple: 8

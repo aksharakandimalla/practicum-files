@@ -1,6 +1,6 @@
 #!/bin/sh
 #SBATCH --nodes 1    # how many nodes are required (in most cases it is 1)
-#SBATCH -J IITB-ENHI-1  # arbitrary name for the job (you choose)
+#SBATCH -J wiki-ENHI  # arbitrary name for the job (you choose)
 #SBATCH -t 48:00:00    # maximum execution time, (optional)
 #SBATCH -p compute
 #SBATCH --gres=gpu:1
@@ -18,8 +18,8 @@
 # your commands here
 
 
-onmt_build_vocab -config /home/akandimalla/practicum/jobs/IITB-ENHI-1.yaml -n_sample 32000
+#onmt_build_vocab -config /home/akandimalla/practicum/jobs/IITB-ENHI-1.yaml -n_sample 32000
 
-onmt_train -config /home/akandimalla/practicum/jobs/IITB-ENHI-1.yaml
+onmt_train -config /practicum2/jobs/jobswiki-enhi/wiki-ENHI.yaml
 
 

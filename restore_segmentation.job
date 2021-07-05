@@ -7,7 +7,7 @@
 
 
 inDir=/home/akandimalla/practicum2/data/en_hi/preProcessedwiki/raw_translations
-outDir=/home/akandimalla/practicum2/data/en_hi/restored_segmentation
+outDir=/home/akandimalla/practicum2/data/en_hi/preProcessedwiki/restored_segmentation
 
 
 for filePath in $inDir/*;do

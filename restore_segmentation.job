@@ -1,0 +1,17 @@
+#!/bin/sh
+#SBATCH --nodes 1    # how many nodes are required (in most cases it is 1)
+#SBATCH -J deBPE   # arbitrary name for the job (you choose)
+#SBATCH -t 1:00:00    # maximum execution time, (optional)
+#SBATCH -p compute
+#SBATCH --gres=gpu:1
+
+
+inDir=/home/akandimalla/practicum2/data/en_hi/preProcessedwiki/raw_translations
+outDir=/home/akandimalla/practicum2/data/en_hi/restored_segmentation
+
+
+for filePath in $inDir/*;do
+        fileName=$(basename $filePath)
+        echo restoring segmentation for $fileName ....
+        sed -r 's/(@@ )|(@@ ?$)//g' $filePath > $outDir/$fileName.resSeg
+done

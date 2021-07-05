@@ -6,8 +6,8 @@
 #SBATCH --gres=gpu:1
 
 
-inDir= /data/en_hi/preProcessedwiki/raw_translations
-outDir= /data/en_hi/preProcessedwiki/restored_segmentation
+inDir= ./data/en_hi/preProcessedwiki/raw_translations
+outDir= ./data/en_hi/preProcessedwiki/restored_segmentation
 
 
 for filePath in $inDir/*;do

@@ -7,18 +7,18 @@
 #
 #
 ## Where the samples will be written
-save_data: ~/practicum2/data/en_hi/preProcessedwiki/examples
+save_data: /practicum2/data/en_hi/preProcessedwiki/examples
 ## Where the vocab(s) will be written
-src_vocab: ~/practicum2/data/en_hi/preProcessedwiki/vocab_wiki.en
-tgt_vocab: ~/practicum2/data/en_hi/preProcessedwiki/vocab_wiki.hi
+src_vocab: /practicum2/data/en_hi/preProcessedwiki/vocab_wiki.en
+tgt_vocab: /practicum2/data/en_hi/preProcessedwiki/vocab_wiki.hi
 # Prevent overwriting existing files in the folder
 overwrite: False
 
 # Tokenization options
 src_subword_type: bpe
-src_subword_model: ~/practicum2/data/en_hi/preProcessedwiki/bpe_en.model
+src_subword_model: /practicum2/data/en_hi/preProcessedwiki/bpe_en.model
 tgt_subword_type: bpe
-tgt_subword_model: ~/practicum2/data/en_hi/preProcessedwiki/bpe_hi.model
+tgt_subword_model: /practicum2/data/en_hi/preProcessedwiki/bpe_hi.model
 
 # Number of candidates for SentencePiece sampling
 subword_nbest: 20
@@ -36,12 +36,12 @@ tgt_onmttok_kwargs: '{"mode": "aggressive", "joiner_annotate": True, "preserve_p
 # Corpus opts:
 data:
     corpus_1:
-        path_src: ~/practicum2/data/en_hi/preProcessedwiki/WikiMatrix.en-hi.bpe.en
-        path_tgt: ~/practicum2/data/en_hi/preProcessedwiki/WikiMatrix.en-hi.bpe.hi
+        path_src: /practicum2/data/en_hi/preProcessedwiki/WikiMatrix.en-hi.bpe.en
+        path_tgt: /practicum2/data/en_hi/preProcessedwiki/WikiMatrix.en-hi.bpe.hi
         transforms: [onmt_tokenize, filtertoolong]
     valid:
-        path_src: ~/practicum2/data/en_hi/preProcessedwiki/dev.bpe.en
-        path_tgt: ~/practicum2/data/en_hi/preProcessedwiki/dev.bpe.hi
+        path_src: /practicum2/data/en_hi/preProcessedwiki/dev.bpe.en
+        path_tgt: /practicum2/data/en_hi/preProcessedwiki/dev.bpe.hi
         transforms: [onmt_tokenize]
 
 # Vocabulary files that were just created
@@ -54,7 +54,7 @@ gpu_ranks: [0]
 
 
 # Where to save the checkpoints
-save_model: ~/practicum2/models/en_to_hi_wiki_bpe
+save_model: /practicum2/models/en_to_hi_wiki_bpe
 save_checkpoint_steps: 1000
 keep_checkpoint: 10
 seed: 3435

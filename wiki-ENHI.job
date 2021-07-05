@@ -20,6 +20,6 @@
 
 #onmt_build_vocab -config /home/akandimalla/practicum/jobs/IITB-ENHI-1.yaml -n_sample 32000
 
-onmt_train -config /practicum2/jobs/jobswiki-enhi/wiki-ENHI.yaml
+onmt_train -config ~/practicum2/jobs/jobswiki-enhi/wiki-ENHI.yaml
 
 

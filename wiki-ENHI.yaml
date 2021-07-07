@@ -1,92 +1,101 @@
 # wiki-ENHI.yaml
 
-# data from trainbible-uedin (43530) and trainOpenSubtitles (19055), total training sentences = 62585
-#
-# Byte pair encoding-200,000 worde model
-# glove embeddings
-#
-#
 ## Where the samples will be written
 save_data: practicum2/data/en_hi/preProcessedwiki/examples
 ## Where the vocab(s) will be written
 src_vocab: practicum2/data/en_hi/preProcessedwiki/vocab_wiki.en
 tgt_vocab: practicum2/data/en_hi/preProcessedwiki/vocab_wiki.hi
+vocab_size_multiple: 8
+src_words_min_frequency: 1
+tgt_words_min_frequency: 1
+
 # Prevent overwriting existing files in the folder
 overwrite: False
 
-# Tokenization options
-src_subword_type: bpe
-src_subword_model: practicum2/data/en_hi/preProcessedwiki/bpe_en.model
-tgt_subword_type: bpe
-tgt_subword_model: practicum2/data/en_hi/preProcessedwiki/bpe_hi.model
-
-# Number of candidates for SentencePiece sampling
-subword_nbest: 20
-# Smoothing parameter for SentencePiece sampling
-subword_alpha: 0.1
-# Specific arguments for pyonmttok
-src_onmttok_kwargs: '{"mode": "aggressive", "joiner_annotate": True, "preserve_placeholders": True, "case_markup": True, "soft_case_regions": True, "preserve_segmented_tokens": True}'
-tgt_onmttok_kwargs: '{"mode": "aggressive", "joiner_annotate": True, "preserve_placeholders": True, "case_markup": True, "soft_case_regions": True, "preserve_segmented_tokens": True}'
-#tgt_onmttok_kwargs: "{'mode': 'none', 'spacer_annotate': True}"
-
-#both_embeddings: glove_dir/glove_dir/glove.6B.100d.txt
-#embeddings_type: "GloVe"
-#word_vec_size: 100
+subword_nbest: 1
+subword_alpha: 0.0
 
 # Corpus opts:
 data:
-    corpus_1:
+    train:
         path_src: practicum2/data/en_hi/preProcessedwiki/WikiMatrix.en-hi.bpe.en
         path_tgt: practicum2/data/en_hi/preProcessedwiki/WikiMatrix.en-hi.bpe.hi
-        transforms: [onmt_tokenize, filtertoolong]
     valid:
         path_src: practicum2/data/en_hi/preProcessedwiki/dev.bpe.en
         path_tgt: practicum2/data/en_hi/preProcessedwiki/dev.bpe.hi
-        transforms: [onmt_tokenize]
 
 # Vocabulary files that were just created
 #src_vocab: s4/run4/example.vocab.src
 #tgt_vocab: s4/run4/example.vocab.tgt
 
+#### Filter
+src_seq_length: 150
+tgt_seq_length: 150
+
+# silently ignore empty lines in the data
+skip_empty_level: silent
+
 # Train on a single GPU
 world_size: 1
 gpu_ranks: [0]
 
+# Batching
+queue_size: 1024
+bucket_size: 32768
+pool_factor: 8192
+batch_type: "tokens"
+batch_size: 3072
+valid_batch_size: 5120
+batch_size_multiple: 1
+max_generator_batches: 2
+accum_count: [2]
+accum_steps: [0]
+
 
 # Where to save the checkpoints
-save_model: practicum2/models/en_to_hi_wiki_bpe
+save_mode: practicum2/models/en_to_hi_wiki_bpe/EnHiBPE
 save_checkpoint_steps: 1000
-keep_checkpoint: 10
+average_decay: 0.0005
+keep_checkpoint: 2
 seed: 3435
-train_steps: 10000
+train_steps: 8000
 valid_steps: 1000
-warmup_steps: 500
-report_every: 500
+report_every: 100
 
-decoder_type: transformer
-encoder_type: transformer
-word_vec_size: 512
-rnn_size: 512
-layers: 6
-transformer_ff: 2048
-heads: 8
-
-accum_count: 8
-optim: adam
-adam_beta1: 0.9
-adam_beta2: 0.998
-decay_method: noam
+# Optimization
+model_dtype: "fp32"
+optim: "adam"
 learning_rate: 2.0
+warmup_steps: 6000
+decay_method: noam
+adam_beta1: 0.9
+adam_beta2: 0.98
 max_grad_norm: 0.0
-
-batch_size: 4096
-batch_type: tokens
-normalization: tokens
-dropout: 0.1
 label_smoothing: 0.1
-
-max_generator_batches: 2
-
 param_init: 0.0
-param_init_glorot: 'true'
-position_encoding: 'true'
+param_init_glorot: true
+normalization: tokens
+
+# Model
+encoder_type: transformer
+decoder_type: transformer
+enc_layers: 6
+dec_layers: 6
+heads: 8
+rnn_size: 512
+word_vec_size: 512
+transformer_ff: 2048
+dropout_steps: 0
+dropout: 0.1
+attention_dropout: 0.1
+#share_decoder_embeddings: true
+#share_embeddings: true
+position_encoding: true
+
+
+layers: 6
+accum_count: 8
+
+
+
+

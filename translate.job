@@ -15,7 +15,7 @@
 modelDir=/home/akandimalla/practicum2/models/en_to_te_wiki #should be something like "/home/.../practicum2/models/model_en-to-bn", where your all English to Bengali models are stored
 testDir=/home/akandimalla/practicum2/data/en_te/preProcessedwiki
 test_file=test.bpe.en   #should be something like "test.bpe.en"
-outDir=/home/akandimalla/practicum2/output/en_bn  #Should be something like "/home/.../practicum2/output/enbn" remember: in this case, you have to create the directory "/home/.../practicum2/output" and then "/home/.../practicum2/output/enbn" only once.
+outDir=/home/akandimalla/practicum2/output/en_te  #Should be something like "/home/.../practicum2/output/enbn" remember: in this case, you have to create the directory "/home/.../practicum2/output" and then "/home/.../practicum2/output/enbn" only once.
 
 
 for model in $modelDir/*; do

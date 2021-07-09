@@ -1,0 +1,18 @@
+#!/bin/sh
+#SBATCH -J regseg   # arbitrary name for the job (you choose)
+#SBATCH -t 2:00:00    # maximum execution time, (optional)
+#SBATCH -p compute
+#SBATCH --mail-user=akshara.kandimalla2@mail.dcu.ie
+#SBATCH --mail-type=END
+#SBATCH --gres=gpu:rtx2080ti:1
+
+
+inDir= /home/akandimalla/practicum2/output/en_bn
+outDir= /home/akandimalla/practicum2/output/en_bn_restored  #shoule be something like /home../practicum2/transRestored  : do not forget to create this directory
+
+
+for filePath in $inDir/*;do
+        fileName=$(basename $filePath)
+        echo restoring segmentation for $fileName ....
+        sed -r 's/(@@ )|(@@ ?$)//g' $filePath > $outDir/$fileName.resSeg
+done

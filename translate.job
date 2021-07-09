@@ -1,0 +1,26 @@
+#!/bin/sh
+#SBATCH -J trans   # arbitrary name for the job (you choose)
+#SBATCH -t 2:00:00    # maximum execution time, (optional)
+#SBATCH -p compute
+#SBATCH --mail-user=akshara.kandimalla2@mail.dcu.ie
+#SBATCH --mail-type=END
+#SBATCH --gres=gpu:rtx2080ti:1
+
+
+modelDir=/home/akandimalla/practicum2/models/en_to_te_wiki #should be
+something like "/home/.../practicum2/models/model_en-to-bn", where your all
+English to Bengali models are stored
+testDir=/home/akandimalla/practicum2/data/en_te/preProcessedwiki
+test_file=test.bpe.en   #should be something like "test.bpe.en"
+outDir=/home/akandimalla/practicum2/output/en_te  #Should be something like
+"/home/.../practicum2/output/enbn" remember: in this case, you have to
+create the directory "/home/.../practicum2/output" and then
+"/home/.../practicum2/output/enbn" only once.
+
+
+for model in $modelDir/*; do
+        modelName=${model##*/}
+        echo translating $test_file by model $modelName ....
+        onmt_translate -model $modelDir/$modelName -src $testDir/$test_file
+-output $outDir/$test_file.transBy$modelName -gpu 0 -verbose
+done

@@ -7,6 +7,7 @@
 #SBATCH --mail-user=your email
 #SBATCH --mail-type=END
 ##SBATCH --gres=gpu:rtx2080ti:1
+#SBATCH --nodelist=g106
 
 # your commands here
 #If you have CUDA error after running this job, put another # in front of "#SBATCH --gres=gpu:1" and then delete one # from "##SBATCH --gres=gpu:rtx2080ti:1"
@@ -21,5 +22,5 @@ outDir=/home/akandimalla/practicum2/output/en_te  #Should be something like "/ho
 for model in $modelDir/*; do
         modelName=${model##*/}
         echo translating $test_file by model $modelName ....
-        onmt_translate -model $modelDir/$modelName -src $testDir/$test_file -output $outDir/$test_file.transBy$modelName -gpu 0 -verbose --nodelist=g106
+        onmt_translate -model $modelDir/$modelName -src $testDir/$test_file -output $outDir/$test_file.transBy$modelName -gpu 0 -verbose 
 done

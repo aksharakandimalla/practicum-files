@@ -6,17 +6,20 @@
 #SBATCH --gres=gpu:1
 #SBATCH --mail-user=your email
 #SBATCH --mail-type=END
-
+##SBATCH --gres=gpu:rtx2080ti:1
 
 # your commands here
-
-#Path delcarationOut
-
-transModel=<your model file with full path>  ## It should be something like /home/.../practicum2/models/en--bn/***_step150000.pt  , the last model step file
-test_file=<your test file with full path>  ## It should be something like /home/.../practicum2/data/enbn/preprocessed/test.bpe.en when en is the source
-trans_output=<your translation output with full path>  ## It should be something like /home/.../practicum2/data/enbn/test.bpe.en.trans  , remember, the translation output is stored in enbn directory, not in the preprocessed directory
+#If you have CUDA error after running this job, put another # in front of "#SBATCH --gres=gpu:1" and then delete one # from "##SBATCH --gres=gpu:rtx2080ti:1"
 
 
-echo translating $test_file by model $transModel....
+modelDir=/home/akandimalla/practicum2/models/en_to_te_wiki #should be something like "/home/.../practicum2/models/model_en-to-bn", where your all English to Bengali models are stored
+testDir=/home/akandimalla/practicum2/data/en_te/preProcessedwiki
+test_file=test.bpe.en   #should be something like "test.bpe.en"
+outDir=/home/akandimalla/practicum2/output/en_bn  #Should be something like "/home/.../practicum2/output/enbn" remember: in this case, you have to create the directory "/home/.../practicum2/output" and then "/home/.../practicum2/output/enbn" only once.
 
-onmt_translate -model $transModel -src $test_file -output $trans_output -gpu 0 -verbose
+
+for model in $modelDir/*; do
+        modelName=${model##*/}
+        echo translating $test_file by model $modelName ....
+        onmt_translate -model $modelDir/$modelName -src $testDir/$test_file -output $outDir/$test_file.transBy$modelName -gpu 0 -verbose --nodelist=g106
+done

@@ -7,8 +7,8 @@
 #SBATCH --gres=gpu:rtx2080ti:1
 
 
-inDir= /home/akandimalla/practicum2/output/en_bn
-outDir= /home/akandimalla/practicum2/output/en_bn_restored  #shoule be something like /home../practicum2/transRestored  : do not forget to create this directory
+inDir= /home/akandimalla/practicum2/output/en_te
+outDir= /home/akandimalla/practicum2/output/en_te_restored  #shoule be something like /home../practicum2/transRestored  : do not forget to create this directory
 
 
 for filePath in $inDir/*;do

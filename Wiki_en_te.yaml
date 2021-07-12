@@ -1,15 +1,15 @@
 # Config for MT training
 #
-save_data: /home/akandimalla/practicum2/models/te_to_en_wiki
+save_data: practicum2/models/te_to_en_wiki
   #
 # Corpus opts:
 data:
     train:
-        path_src: /home/akandimalla/practicum2/data/en_te/preProcessedwiki/wikimatrix-en-te.bpe.te
-        path_tgt: /home/akandimalla/practicum2/data/en_te/preProcessedwiki/wikimatrix-en-te.bpe.en
+        path_src: practicum2/data/en_te/preProcessedwiki/wikimatrix-en-te.bpe.te
+        path_tgt: practicum2/data/en_te/preProcessedwiki/wikimatrix-en-te.bpe.en
     valid:
-        path_src: /home/akandimalla/practicum2/data/en_te/preProcessedwiki/dev.bpe.en
-        path_tgt: /home/akandimalla/practicum2/data/en_te/preProcessedwiki/dev.bpe.te
+        path_src: practicum2/data/en_te/preProcessedwiki/dev.bpe.en
+        path_tgt: practicum2/data/en_te/preProcessedwiki/dev.bpe.te
 
 subword_nbest: 1
 subword_alpha: 0.0
@@ -23,8 +23,8 @@ skip_empty_level: silent
 
 # # Vocab opts
 # ### vocab:
-src_vocab: /home/akandimalla/practicum2/data/en_te/preProcessedwiki/vocab_wiki.te
-tgt_vocab: /home/akandimalla/practicum2/data/en_te/preProcessedwiki/vocab_wiki.en
+src_vocab: practicum2/data/en_te/preProcessedwiki/vocab_wiki.te
+tgt_vocab: practicum2/data/en_te/preProcessedwiki/vocab_wiki.en
 src_vocab_size: 45954
 tgt_vocab_size: 46012
 vocab_size_multiple: 8
@@ -35,7 +35,7 @@ tgt_words_min_frequency: 1
 # # Model training parameters
 
 # General opts
-save_model: /home/akandimalla/practicum2/models/te_to_en_wiki
+save_model: practicum2/models/te_to_en_wiki
 keep_checkpoint: 60
 save_checkpoint_steps: 10000
 average_decay: 0.0005

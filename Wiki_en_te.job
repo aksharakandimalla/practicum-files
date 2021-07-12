@@ -20,6 +20,6 @@
 
 
 # your commands here
-confFile=train.yaml
+confFile=Wiki_en_te.yaml
 
 onmt_train -config $confFile

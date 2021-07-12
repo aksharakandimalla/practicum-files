@@ -1,0 +1,25 @@
+#!/bin/sh
+#SBATCH --nodes 1    # how many nodes are required (in most cases it is 1)
+#SBATCH -J hi-en   # arbitrary name for the job (you choose)
+#SBATCH -t 24:00:00    # maximum execution time, (optional)
+#SBATCH -p compute
+##SBATCH --gres=gpu:1
+##SBATCH --cpus-per-task=4    # tell Slurm how many CPU cores you need, if different from default; your job won't be able to use more than this
+#SBATCH --gres=gpu:rtx2080ti:1
+#SBATCH --mail-user=akshara.kandima2@mail.dcu.ie
+#SBATCH --mail-type=END
+
+
+# load modules if needed (modules are used in the Boole cluster only)
+#module load staskfarm
+# check which modules are available
+#module av
+
+# uncomment the following to get a log of memory usage
+# vmstat -S M {interval_secs} >> memory_usage_$SLURM_JOBID.log &
+
+
+# your commands here
+confFile=train.yaml
+
+onmt_train -config $confFile

@@ -1,6 +1,6 @@
 #!/bin/sh
 #SBATCH --nodes 1    # how many nodes are required (in most cases it is 1)
-#SBATCH -J hi-en   # arbitrary name for the job (you choose)
+#SBATCH -J te-en   # arbitrary name for the job (you choose)
 #SBATCH -t 24:00:00    # maximum execution time, (optional)
 #SBATCH -p compute
 ##SBATCH --gres=gpu:1

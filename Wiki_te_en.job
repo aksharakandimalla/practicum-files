@@ -20,6 +20,6 @@
 
 
 # your commands here
-confFile=Wiki_te_en.yaml
+confFile= ./practicum2/jobs/jobsWiki_te_en/Wiki_te_en.yaml
 
 onmt_train -config $confFile

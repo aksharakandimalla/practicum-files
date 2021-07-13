@@ -1,3 +1,4 @@
+import torch
 model_ft = torch.load('/home/akandimalla/practicum/te_en_models/s4/run4/model_step_9000.pt')
 ct = 0
 for child in model_ft.children():

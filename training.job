@@ -1,25 +1,25 @@
 #!/bin/sh
 #SBATCH --nodes 1    # how many nodes are required (in most cases it is 1)
-#SBATCH -J jw_en-bn   # arbitrary name for the job (you choose)
-#SBATCH -t 48:00:00    # maximum execution time, (optional)
+#SBATCH -J hibn-en   # arbitrary name for the job (you choose)
+#SBATCH -t 24:00:00    # maximum execution time, (optional)
 #SBATCH -p compute
-#SBATCH --gres=gpu:1
+##SBATCH --gres=gpu:1
 ##SBATCH --cpus-per-task=4    # tell Slurm how many CPU cores you need, if different from default; your job won't be able to use more than this
-##SBATCH --gres=gpu:rtx2080ti:4
-#SBATCH --mail-user=your email
+#SBATCH --gres=gpu:rtx2080ti:1
+#SBATCH --mail-user=akshara.kandimalla2@mail.dcu.ie
 #SBATCH --mail-type=END
 
 
-## Note that you will be requesting one GPU for this training. You can request for upto 4 GPUs for single traning. 
-## In that case, put one more # in the "#SBATCH --gres=gpu:1" command that will comment this 
-## and delete one # from "##SBATCH --cpus-per-task=4" and "##SBATCH --gres=gpu:rtx2080ti:4" commands. 
-## then, go to the training.yaml file and change world size = 1 to world size = 4 
-## and gpu ranks=[0] to gpu ranks = [0, 1, 2, 3]
+# load modules if needed (modules are used in the Boole cluster only)
+#module load staskfarm
+# check which modules are available
+#module av
 
-## However, I am not reccomending these at this moment. 
+# uncomment the following to get a log of memory usage
+# vmstat -S M {interval_secs} >> memory_usage_$SLURM_JOBID.log &
 
 
 # your commands here
-confFile=training.yaml
+confFile=train.yaml
 
-onmt_train -config $confFile 
+onmt_train -config $confFile

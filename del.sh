@@ -3,9 +3,9 @@
 
 
 
-rm *_step_10000.pt
+#rm *_step_10000.pt
 #rm *_step_20000.pt
-#rm *_step_30000.pt
+rm *_step_30000.pt
 rm *_step_40000.pt
 rm *_step_50000.pt
 rm *_step_60000.pt
